@@ -173,19 +173,19 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
     
     wire reset;
     assign reset = 0;
-    //debounce rdb(.reset(reset), .clock(CLK100MHZ), .noisy(CPU_RESETN), .clean(reset));
+    
     
     wire CLK108MHZ;
      clk_wiz_0 ClockDivider
        (
-       // Clock in ports
-        .clk_in1(CLK100MHZ),      // input clk_in1
-        // Clock out ports
-        .clk_out1(CLK108MHZ),    // output clk_out1
-        // Status and control signals
+      
+        .clk_in1(CLK100MHZ),      
+       
+        .clk_out1(CLK108MHZ),    
+       
         .reset(reset), // input reset
         .locked(locked));
-          // Scope settings
+          
     wire btnu_clean, btnd_clean, btnc_clean, btnl_clean;
      wire btnu_1pulse,btnd_1pulse,btnc_1pulse,btnl_1pulse;
     wire signed [11:0] triggerThreshold;
@@ -194,7 +194,7 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
     wire [5:0] samplePeriod;
     wire channelSelected;
     assign LED[15] = channelSelected;
-  // these come from MeasureSignal
+
     wire signed [11:0] signalMinChannel1;
     wire signed [11:0] signalMaxChannel1;
     wire [11:0] signalPeriodChannel1;
@@ -213,32 +213,43 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
                         .verticalScaleFactorTimes8Channel2(verticalScaleFactorTimes8Channel2),
                         .samplePeriod(samplePeriod), .channelSelected(channelSelected)
                                  );
-                                  wire [DRP_ADDRESS_BITS-1:0] DRPAddress;
+                                 
+    wire [3:0] verticalScaleExponentChannel1;
+    wire [3:0] verticalScaleExponentChannel2;
+    GetVerticalScaleExponents myGetVericalScaleExponents
+                                    (.clock(CLK108MHZ),
+                                    .verticalScaleFactorTimes8Channel1(verticalScaleFactorTimes8Channel1),
+                                    .verticalScaleFactorTimes8Channel2(verticalScaleFactorTimes8Channel2),
+                                    .verticalScaleExponentChannel1(verticalScaleExponentChannel1),
+                                    .verticalScaleExponentChannel2(verticalScaleExponentChannel2)
+                                    );         
+    wire [DRP_ADDRESS_BITS-1:0] DRPAddress;
     wire DRPEnable;
     wire DRPWriteEnable;
     wire DRPReady;
     wire signed [DRP_SAMPLE_BITS-1:0] DRPDataOut;
     wire endOfConversion;
+    
   xadc_wiz_0 xadc (
-        .di_in(),                       // input wire [15 : 0] di_in
-        .daddr_in(DRPAddress),          // input wire [6 : 0] daddr_in
-        .den_in(DRPEnable),             // input wire den_in
-        .dwe_in(DRPWriteEnable),        // input wire dwe_in
-        .drdy_out(DRPReady),            // output wire drdy_out
-        .do_out(DRPDataOut),            // output wire [15 : 0] do_out
-        .dclk_in(CLK108MHZ),            // input wire dclk_in
-        .reset_in(reset),               // input wire reset_in
-        .vp_in(),                       // input wire vp_in
-        .vn_in(),                       // input wire vn_in
-        .vauxp3(vauxp3),                // input wire vauxp3
-        .vauxn3(vauxn3),                // input wire vauxn3
-        .vauxp11(vauxp11),              // input wire vauxp11
-        .vauxn11(vauxn11),              // input wire vauxn11
-        .channel_out(),                 // output wire [4 : 0] channel_out
-        .eoc_out(endOfConversion),      // output wire eoc_out
-        .alarm_out(),                   // output wire alarm_out
-        .eos_out(),                     // output wire eos_out
-        .busy_out()                     // output wire busy_out
+        .di_in(),                       
+        .daddr_in(DRPAddress),          
+        .den_in(DRPEnable),             
+        .dwe_in(DRPWriteEnable),        
+        .drdy_out(DRPReady),           
+        .do_out(DRPDataOut),            
+        .dclk_in(CLK108MHZ),            
+        .reset_in(reset),               
+        .vp_in(),                       
+        .vn_in(),                       
+        .vauxp3(vauxp3),                
+        .vauxn3(vauxn3),                
+        .vauxp11(vauxp11),              
+        .vauxn11(vauxn11),              
+        .channel_out(),                 
+        .eoc_out(endOfConversion),     
+        .alarm_out(),                  
+        .eos_out(),                    
+        .busy_out()                     
         );
         wire signed [SAMPLE_BITS-1:0] channel1;
     wire signed [SAMPLE_BITS-1:0] channel2;
@@ -259,7 +270,7 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
         .state(state),
         .previousState(previousState)
         );
-               // ADC controller channel1
+               
       wire adcc_ready;
       wire adccRawReady;
       wire signed [11:0] ADCCdataOutChannel1;
@@ -274,7 +285,7 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
                              .inputReady(channelDataReady),
                              .samplePeriod(samplePeriod),
                              .ready(adcc_ready),
-                             .rawReady(adccRawReady), // not affected by samplePeriod
+                             .rawReady(adccRawReady), 
                              .dataInChannel1(channel1),
                              .dataOutChannel1(ADCCdataOutChannel1),
                              .rawDataOutChannel1(adccRawDataOutChannel1),
@@ -282,7 +293,7 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
                              .dataOutChannel2(ADCCdataOutChannel2),
                              .rawDataOutChannel2(adccRawDataOutChannel2)
                              );
-                             // edge type detector channel 1
+                            
    wire risingEdgeReadyChannel1;
    wire signed [13:0] slopeChannel1;
    wire positiveSlopeChannel1;
@@ -294,7 +305,7 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
       .estimatedSlope(slopeChannel1),
       .estimatedSlopeIsPositive(positiveSlopeChannel1));
       
-    // edge type detector channel 2
+    
     wire risingEdgeReadyChannel2;
     wire signed [13:0] slopeChannel2;
     wire positiveSlopeChannel2;
@@ -312,4 +323,29 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
         .drawStarting(drawStarting),
         .activeBramSelect(activeBramSelect)
         );
+         wire [ADDRESS_BITS-1:0] curveAddressOutChannel1;
+    wire [ADDRESS_BITS-1:0] curveAddressOutChannel2;
+    wire [ADDRESS_BITS-1:0] xyChannel1Address;
+    wire [ADDRESS_BITS-1:0] xyChannel2Address; 
+    
+    wire isTriggered;
+    wire [11:0] bufferDataOutChannel1;
+    
+    buffer BufferChannel1 (.clock(CLK108MHZ), .ready(adcc_ready), .dataIn(ADCCdataOutChannel1),
+        .isTrigger(isTriggered), .disableCollection(0), .activeBramSelect(activeBramSelect),
+        .reset(reset),
+        .readTriggerRelative(1),
+        .readAddress(xyDisplayMode ? xyChannel1Address : curveAddressOutChannel1),
+        .dataOut(bufferDataOutChannel1));
+    
+    
+    
+    wire [11:0] bufferDataOutChannel2;      
+    buffer BufferChannel2 (.clock(CLK108MHZ), .ready(adcc_ready), .dataIn(ADCCdataOutChannel2),
+                        .isTrigger(isTriggered), .disableCollection(0), .activeBramSelect(activeBramSelect),
+                        .reset(reset),
+                        .readTriggerRelative(1),
+                        .readAddress(xyDisplayMode ? xyChannel2Address : curveAddressOutChannel2),
+                        .dataOut(bufferDataOutChannel2));       
+                                       
 endmodule

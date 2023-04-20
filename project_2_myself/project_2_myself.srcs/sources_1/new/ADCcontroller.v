@@ -32,7 +32,7 @@ module ADCcontroller
     input inputReady,
     input [5:0]samplePeriod,
     output reg ready,
-    output reg rawReady, // not affected by samplePeriod
+    output reg rawReady, 
     input signed [IO_BITS-1:0] dataInChannel1,
     output reg signed[IO_BITS-1:0] dataOutChannel1,
     output reg signed[IO_BITS-1:0] rawDataOutChannel1,
@@ -48,12 +48,12 @@ module ADCcontroller
     wire [NUMERATOR_SCALED_DATA_BITS-1:0] dataInChannel2NumeratorScaled;
     assign dataInChannel2NumeratorScaled = dataInChannel2 * NUMERATOR_SCALE_FACTOR;
      always @(posedge clock) begin
-        // check whether it's time to request another sample
+       
         if (!reset && sampleEnabled && inputReady) begin
             if (sampleClock >= samplePeriod) begin
                 ready <= 1;
-                dataOutChannel1 <= dataInChannel1NumeratorScaled >>> DENOMINATOR_RIGHT_SHIFT; //scale by 1000/1024
-                dataOutChannel2 <= dataInChannel2NumeratorScaled >>> DENOMINATOR_RIGHT_SHIFT; //scale by 1000/1024
+                dataOutChannel1 <= dataInChannel1NumeratorScaled >>> DENOMINATOR_RIGHT_SHIFT; 
+                dataOutChannel2 <= dataInChannel2NumeratorScaled >>> DENOMINATOR_RIGHT_SHIFT; 
                 sampleClock <= 0;
             end 
             else

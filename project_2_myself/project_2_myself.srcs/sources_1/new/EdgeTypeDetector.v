@@ -64,15 +64,7 @@ module EdgeTypeDetector
        if (state < 7) begin
            state <= state + 1;
      
-       // estimatedSlope = oldEstimatedSlope * .5 + currentSlope * .5
-       //estimatedSlope1 <= (dataIn - previousSamples[5]) * 64
-   /*    intermediates[5] <= -1 * previousSamples[1];
-       intermediates[4] <= 8 * previousSamples[2];
-       intermediates[3] <= -8 * previousSamples[4];
-       intermediates[2] <= previousSamples[5];
-     */
-     
-     // these would average the samples
+      
         intermediates[5] <= previousSamples[1];
         intermediates[4] <= 2 * previousSamples[2];
         intermediates[3] <= 3 * previousSamples[3];
@@ -81,17 +73,13 @@ module EdgeTypeDetector
        
        smoothedSample <= (intermediates[5] + intermediates[4] + intermediates[3] + intermediates[2] + intermediates[1]) / 8;
          
-       //estimatedSlope intermediates[5] + intermediates[4] + intermediates[3] ; //estimatedSlope1; // + (estimatedSlope >> 1
-       
-       //risingEdge <= estimatedSlope > 0 ? 1 : 0;
+     
      end end
     
-   //  if (risingEdgeReady)
-     //       risingEdgeReady <= 0;
+ 
    end
 
 endmodule
 
 
-// More ideas: to have sliding-in-time, simply don't mark newest trigger sample; hold onto a trigger sample until we have another one at least k samples ago.
 
