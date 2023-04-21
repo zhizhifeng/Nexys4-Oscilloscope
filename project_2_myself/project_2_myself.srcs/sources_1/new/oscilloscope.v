@@ -347,5 +347,28 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
                         .readTriggerRelative(1),
                         .readAddress(xyDisplayMode ? xyChannel2Address : curveAddressOutChannel2),
                         .dataOut(bufferDataOutChannel2));       
-                                       
+    SelectChannelData mySelectChannelData
+            (.clock(CLK108MHZ),
+            .channel1(adccRawDataOutChannel1),
+            .channel2(adccRawDataOutChannel2),
+            .positiveSlopeChannel1(positiveSlopeChannel1),
+            .positiveSlopeChannel2(positiveSlopeChannel2),
+            .verticalScaleFactorTimes8Channel1(verticalScaleFactorTimes8Channel1),
+            .verticalScaleFactorTimes8Channel2(verticalScaleFactorTimes8Channel2),
+            .verticalScaleExponentChannel1(verticalScaleExponentChannel1),
+            .verticalScaleExponentChannel2(verticalScaleExponentChannel2),
+            .channelSelected(channelSelected),
+            .channelSelectedData(channelSelectedData),
+            .positiveSlopeChannelSelected(positiveSlopeChannelSelected),
+            .verticalScaleFactorTimes8ChannelSelected(verticalScaleFactorTimes8ChannelSelected),
+            .verticalScaleExponentChannelSelected(verticalScaleExponentChannelSelected)
+            );
+            TriggerRisingEdgeSteady Trigger
+            (.clock(CLK108MHZ),
+            .threshold(triggerThreshold),
+            .dataReady(adccRawReady),
+            .dataIn(channelSelectedData),
+            .triggerDisable(~positiveSlopeChannelSelected),
+            .isTriggered(isTriggered)
+            );
 endmodule
