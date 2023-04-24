@@ -28,8 +28,8 @@ module yScale(
     wire [`DATA_IN_BITS - 1:0] data_in_abs;
     wire [`DATA_IN_BITS - 1:0] data_in_abs_scaled;
 
-    assign data_in_abs = ((data_in_abs) > 0 ? (data_in_abs) : (0 - data_in_abs));
-    assign data__abs_scaled = (scale_exp > 8) ? data_in_abs << (scale_exp - 8) : data_in_abs >> (8 - scale_exp);
+    assign data_in_abs = ((data_in) > 0 ? (data_in) : (0 - data_in));
+    assign data_in_abs_scaled = (scale_exp > 8) ? (data_in_abs << (scale_exp - 8)) : (data_in_abs >> (8 - scale_exp));
     assign data_in_scaled = (data_in < 0) ? (0 - data_in_abs_scaled) : data_in_abs_scaled;
 
 

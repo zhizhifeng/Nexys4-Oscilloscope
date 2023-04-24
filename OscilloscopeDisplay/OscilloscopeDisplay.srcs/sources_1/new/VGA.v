@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2023/04/18 16:27:31
-// Design Name: 
-// Module Name: VGA
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 // Input/Output Ports:
 // Input:
 // pclk - varies depending on the TYPE
@@ -46,7 +26,7 @@ module VGA #(
     reg hsync_i, vsync_i, hsync_default, vsync_default;
     integer HD, HF, HA, HB, HT, VD, VF, VA, VB, VT;
     
-    always @(TYPE)
+    always @(posedge pclk)
     case(TYPE)
       2'b00  : begin    //VESA 1280x1024@60 Hz (pixel clock 108.0 MHz)
                   HD = 1280;    //horizontal display width
@@ -80,7 +60,7 @@ module VGA #(
 
     // horizontal counter
     always@(posedge pclk)
-        if(reset)
+        if(!reset)
             pixel_cnt <= 0;
         else if(pixel_cnt < (HT - 1))
                 pixel_cnt <= pixel_cnt + 1;
@@ -89,7 +69,7 @@ module VGA #(
 
     // horizontal sync
     always@(posedge pclk)
-        if(reset)
+        if(!reset)
             hsync_i <= hsync_default;
         else if((pixel_cnt >= (HD + HF - 1))&&(pixel_cnt < (HD + HF + HA - 1)))
                 hsync_i <= ~hsync_default;
@@ -98,7 +78,7 @@ module VGA #(
     
     // vertical counter
     always@(posedge pclk)
-        if(reset)
+        if(!reset)
             line_cnt <= 0;
         else if(pixel_cnt == (HT -1))
                 if(line_cnt < (VT - 1))
@@ -108,7 +88,7 @@ module VGA #(
 
     // vertical sync
     always@(posedge pclk)
-        if(reset)
+        if(!reset)
             vsync_i <= vsync_default; 
         else if((line_cnt >= (VD + VF - 1))&&(line_cnt < (VD + VF + VA - 1)))
             vsync_i <= ~vsync_default; 

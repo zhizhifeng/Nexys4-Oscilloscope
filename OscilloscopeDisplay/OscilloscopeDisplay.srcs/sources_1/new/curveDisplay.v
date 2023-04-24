@@ -1,25 +1,5 @@
 `timescale 1ns / 1ps
 `include "display.vh"
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2023/04/20 20:13:37
-// Design Name: 
-// Module Name: curveDisplay
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module curveDisplay#(
     parameter RGB  = `YELLOW
@@ -36,8 +16,11 @@ module curveDisplay#(
     assign display_position = `HORIZONTAL_ZERO - data_in;
     assign data_address = y_cnt;
     always @(posedge clk) begin
-        if ((display_position - 1) <= y_cnt && (y_cnt <= (display_position + 1))) begin
+        if (((display_position - 1) <= y_cnt) && (y_cnt <= (display_position + 1))) begin
             rgb = (y_cnt == display_position) ? RGB : `BLACK; 
+        end
+        else begin
+            rgb = `BLACK;
         end
     end
 endmodule
