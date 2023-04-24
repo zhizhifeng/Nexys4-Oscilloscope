@@ -1,31 +1,10 @@
 `timescale 1ns / 1ps
 `include "display.vh"
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2023/04/19 08:07:32
-// Design Name: 
-// Module Name: charRead
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module charRead(
     input clka,
     input [`DISPLAY_X_BITS - 1:0] x_cnt,
     input [`DISPLAY_Y_BITS - 1:0] y_cnt,
-    input char_valid,
     input [`CHAR_BITS-1:0] char_data,
     input [`CHAR_X_BITS-1:0] row_addr,
     input [`CHAR_Y_BITS-1:0] col_addr,
