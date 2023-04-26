@@ -230,92 +230,70 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
     wire signed [DRP_SAMPLE_BITS-1:0] DRPDataOut;
     wire endOfConversion;
     
-  xadc_wiz_0 xadc (
-        .di_in(),                       
-        .daddr_in(DRPAddress),          
-        .den_in(DRPEnable),             
-        .dwe_in(DRPWriteEnable),        
-        .drdy_out(DRPReady),           
-        .do_out(DRPDataOut),            
-        .dclk_in(CLK108MHZ),            
-        .reset_in(reset),               
-        .vp_in(),                       
-        .vn_in(),                       
-        .vauxp3(vauxp3),                
-        .vauxn3(vauxn3),                
-        .vauxp11(vauxp11),              
-        .vauxn11(vauxn11),              
-        .channel_out(),                 
-        .eoc_out(endOfConversion),     
-        .alarm_out(),                  
-        .eos_out(),                    
-        .busy_out()                     
-        );
-        wire signed [SAMPLE_BITS-1:0] channel1;
+     wire signed [SAMPLE_BITS-1:0] channel1;
     wire signed [SAMPLE_BITS-1:0] channel2;
     wire channelDataReady;
     wire [TOGGLE_CHANNELS_STATE_BITS-1:0] state;
     wire [TOGGLE_CHANNELS_STATE_BITS-1:0] previousState;
-    ToggleChannels myToggleChannels(
-        .clock(CLK108MHZ),
-        .endOfConversion(endOfConversion),
-        .DRPReady(DRPReady),
-        .DRPDataOut(DRPDataOut[15:4]),
-        .DRPEnable(DRPEnable),
-        .DRPWriteEnable(DRPWriteEnable),
-        .channel1(channel1),
-        .channel2(channel2),
-        .DRPAddress(DRPAddress),
-        .channelDataReady(channelDataReady),
-        .state(state),
-        .previousState(previousState)
-        );
-               
-      wire adcc_ready;
+    wire adcc_ready;
       wire adccRawReady;
       wire signed [11:0] ADCCdataOutChannel1;
       wire signed [11:0] adccRawDataOutChannel1;
       wire signed [11:0] ADCCdataOutChannel2;
       wire signed [11:0] adccRawDataOutChannel2;
-
-      ADCcontroller adcc(
-                             .clock(CLK108MHZ),
-                             .reset(reset),
-                             .sampleEnabled(1),
-                             .inputReady(channelDataReady),
-                             .samplePeriod(samplePeriod),
-                             .ready(adcc_ready),
-                             .rawReady(adccRawReady), 
-                             .dataInChannel1(channel1),
-                             .dataOutChannel1(ADCCdataOutChannel1),
+    ADC adc(
+    .channel1(channel1),
+    .channel2(channel2),
+    .channelDataReady(channelDataReady),
+    .state(state),
+    .previousState(previousState),
+    .adcc_ready(adcc_ready),
+    .adccRawReady(adccRawReady),
+    .ADCCdataOutChannel1(ADCCdataOutChannel1),
+    .adccRawDataOutChannel1(adccRawDataOutChannel1),
+    .ADCCdataOutChannel2(ADCCdataOutChannel2),
+    .adccRawDataOutChannel2(adccRawDataOutChannel2),
+    .di_in(),                       
+        .daddr_in(DRPAddress),          
+        .den_in(DRPEnable),             
+        .dwe_in(DRPWriteEnable),  
+         .clk(CLK108MHZ),            
+        .reset(reset),
+        .vp_in(),                       
+        .vn_in(),                       
+        .vauxp3(vauxp3),                
+        .vauxn3(vauxn3),                
+        .vauxp11(vauxp11),              
+        .vauxn11(vauxn11), 
+        .sampleperiod(sampleperiod),
+         .dataOutChannel1(ADCCdataOutChannel1),
                              .rawDataOutChannel1(adccRawDataOutChannel1),
-                             .dataInChannel2(channel2),
                              .dataOutChannel2(ADCCdataOutChannel2),
-                             .rawDataOutChannel2(adccRawDataOutChannel2)
-                             );
-                            
+                             .rawDataOutChannel2(adccRawDataOutChannel2),
+                              .ready(adcc_ready),
+                             .rawReady(adccRawReady)
+    );
+             
    wire risingEdgeReadyChannel1;
    wire signed [13:0] slopeChannel1;
    wire positiveSlopeChannel1;
-    EdgeTypeDetector myEdgeTypeDetectorChannel1
-     (.clock(CLK108MHZ),
-      .dataReady(adccRawReady),
-      .dataIn(adccRawDataOutChannel1),
-      .risingEdgeReady(risingEdgeReadyChannel1),
-      .estimatedSlope(slopeChannel1),
-      .estimatedSlopeIsPositive(positiveSlopeChannel1));
-      
-    
-    wire risingEdgeReadyChannel2;
+   wire risingEdgeReadyChannel2;
     wire signed [13:0] slopeChannel2;
     wire positiveSlopeChannel2;
-    EdgeTypeDetector myEdgeTypeDetectorChannel2
-        (.clock(CLK108MHZ),
-         .dataReady(adccRawReady),
-         .dataIn(adccRawDataOutChannel2),
-         .risingEdgeReady(risingEdgeReadyChannel2),
-         .estimatedSlope(slopeChannel2),
-         .estimatedSlopeIsPositive(positiveSlopeChannel2));
+   Totaltrigger totaltrigger(
+   .risingEdgeReadyChannel1(risingEdgeReadyChannel1),
+   .slopeChannel1(slopeChannel1),
+   .positiveSlopeChannel1(positiveSlopeChannel1),
+   .risingEdgeReadyChannel2(risingEdgeReadyChannel2),
+   .slopeChannel2(slopeChannel2),
+   .positiveSlopeChannel2(positiveSlopeChannel2),
+   .clock(CLK108MHZ),
+      .dataReady(adccRawReady),
+      .dataIn(adccRawDataOutChannel1),
+      .threshold(triggerThreshold),
+      .triggerDisable(~positiveSlopeChannelSelected),
+            .isTriggered(isTriggered)
+   );
          wire drawStarting;
     wire activeBramSelect;
     BufferSelector mybs(
@@ -363,12 +341,5 @@ module oscilloscope#(parameter  DISPLAY_X_BITS = 12,
             .verticalScaleFactorTimes8ChannelSelected(verticalScaleFactorTimes8ChannelSelected),
             .verticalScaleExponentChannelSelected(verticalScaleExponentChannelSelected)
             );
-            TriggerRisingEdgeSteady Trigger
-            (.clock(CLK108MHZ),
-            .threshold(triggerThreshold),
-            .dataReady(adccRawReady),
-            .dataIn(channelSelectedData),
-            .triggerDisable(~positiveSlopeChannelSelected),
-            .isTriggered(isTriggered)
-            );
+           
 endmodule
