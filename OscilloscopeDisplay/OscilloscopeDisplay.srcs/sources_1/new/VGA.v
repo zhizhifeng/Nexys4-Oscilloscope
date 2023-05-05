@@ -28,34 +28,34 @@ module VGA #(
     
     always @(posedge pclk)
     case(TYPE)
-      2'b00  : begin    //VESA 1280x1024@60 Hz (pixel clock 108.0 MHz)
-                  HD = 1280;    //horizontal display width
-                  HF = 48;      //horizontal front porch
-                  HA = 112;     //horizontal active
-                  HB = 248;     //horizontal back porch
-                  HT = 1688;    //horizontal total
-                  VD = 1024;    //vertical display width
-                  VF = 1;       //vertical front porch
-                  VA = 3;       //vertical active
-                  VB = 38;      //vertical back porch
-                  VT = 1066;    //vertical total
-                  hsync_default = 1'b0;
-                  vsync_default = 1'b0;
-             end
-      default: begin
-                  HD = 640;
-                  HF = 16;
-                  HA = 96;
-                  HB = 48;
-                  HT = 800;
-                  VD = 480;
-                  VF = 10;
-                  VA = 2;
-                  VB = 33;
-                  VT = 525;      
-                  hsync_default = 1'b1;
-                  vsync_default = 1'b1;       
-              end
+        2'b00: begin    //VESA 1280x1024@60 Hz (pixel clock 108.0 MHz)
+            HD <= 1280;    //horizontal display width
+            HF <= 48;      //horizontal front porch
+            HA <= 112;     //horizontal active
+            HB <= 248;     //horizontal back porch
+            HT <= 1688;    //horizontal total
+            VD <= 1024;    //vertical display width
+            VF <= 1;       //vertical front porch
+            VA <= 3;       //vertical active
+            VB <= 38;      //vertical back porch
+            VT <= 1066;    //vertical total
+            hsync_default <= 1'b0;
+            vsync_default <= 1'b0;
+        end
+        default: begin
+            HD <= 640;
+            HF <= 16;
+            HA <= 96;
+            HB <= 48;
+            HT <= 800;
+            VD <= 480;
+            VF <= 10;
+            VA <= 2;
+            VB <= 33;
+            VT <= 525;      
+            hsync_default <= 1'b1;
+            vsync_default <= 1'b1;       
+        end
     endcase
 
     // horizontal counter
@@ -63,28 +63,28 @@ module VGA #(
         if(!reset)
             pixel_cnt <= 0;
         else if(pixel_cnt < (HT - 1))
-                pixel_cnt <= pixel_cnt + 1;
-             else
-                pixel_cnt <= 0;
+            pixel_cnt <= pixel_cnt + 1;
+        else
+            pixel_cnt <= 0;
 
     // horizontal sync
     always@(posedge pclk)
         if(!reset)
             hsync_i <= hsync_default;
         else if((pixel_cnt >= (HD + HF - 1))&&(pixel_cnt < (HD + HF + HA - 1)))
-                hsync_i <= ~hsync_default;
-            else
-                hsync_i <= hsync_default; 
+            hsync_i <= ~hsync_default;
+        else
+            hsync_i <= hsync_default; 
     
     // vertical counter
     always@(posedge pclk)
         if(!reset)
             line_cnt <= 0;
         else if(pixel_cnt == (HT -1))
-                if(line_cnt < (VT - 1))
-                    line_cnt <= line_cnt + 1;
-                else
-                    line_cnt <= 0;
+            if(line_cnt < (VT - 1))
+                line_cnt <= line_cnt + 1;
+            else
+                line_cnt <= 0;
 
     // vertical sync
     always@(posedge pclk)
