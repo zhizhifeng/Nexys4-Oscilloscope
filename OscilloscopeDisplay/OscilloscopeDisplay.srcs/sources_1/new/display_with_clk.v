@@ -36,8 +36,8 @@ module display_with_clk(input clk,
     .data_in_2    ({data_in[15:8], 4'b0000}),
     .scale_exp_1  (8),
     .scale_exp_2  (8),
-    .hsync        (hsync),
-    .vsync        (vsync),
+    .hsync_out    (hsync),
+    .vsync_out    (vsync),
     .rgb          (rgb),
     .data_address (data_address)
     );

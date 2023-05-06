@@ -8,8 +8,8 @@ module infoDisplay (input clk,
                     output [`RGB_BITS - 1:0] rgb,
                     output info_valid);
     
-    wire [`CHAR_X_BITS - 1:0] row_addr_1;
-    wire [`CHAR_Y_BITS - 1:0] col_addr_1;
+    wire [`CHAR_Y_BITS - 1:0] row_addr_1;
+    wire [`CHAR_X_BITS - 1:0] col_addr_1;
     wire [`CHAR_BITS-1:0] char_data_1;
     wire [`RGB_BITS-1:0] rgb_1;
     wire char_valid_1;
@@ -35,8 +35,8 @@ module infoDisplay (input clk,
     .rgb_out       (rgb_1)
     );
     
-    wire [`CHAR_X_BITS - 1:0] row_addr_2;
-    wire [`CHAR_Y_BITS - 1:0] col_addr_2;
+    wire [`CHAR_Y_BITS - 1:0] row_addr_2;
+    wire [`CHAR_X_BITS - 1:0] col_addr_2;
     wire [`CHAR_BITS-1:0] char_data_2;
     wire [`RGB_BITS-1:0] rgb_2;
     wire char_valid_2;
@@ -62,8 +62,8 @@ module infoDisplay (input clk,
     .rgb_out       (rgb_2)
     );
 
-    wire [`CHAR_X_BITS - 1:0] row_addr_3;
-    wire [`CHAR_Y_BITS - 1:0] col_addr_3;
+    wire [`CHAR_Y_BITS - 1:0] row_addr_3;
+    wire [`CHAR_X_BITS - 1:0] col_addr_3;
     wire [`CHAR_BITS-1:0] char_data_3;
     wire [`RGB_BITS-1:0] rgb_3;
     wire char_valid_3;

@@ -7,8 +7,8 @@ module display(input clk,
                input [`DATA_IN_BITS - 1:0] data_in_2,
                input [`SCALE_BITS - 1:0] scale_exp_1,
                input [`SCALE_BITS - 1:0] scale_exp_2,
-               output hsync,
-               output vsync,
+               output reg hsync_out,
+               output reg vsync_out,
                output [`RGB_BITS - 1:0] rgb,
                output [`DATA_ADDRESS_BITS - 1:0] data_address);
     
@@ -20,6 +20,8 @@ module display(input clk,
     wire curve_valid_1;
     wire curve_valid_2;
     wire info_valid;
+    wire hsync;
+    wire vsync;
     
     VGA #(
     .TYPE (0)
@@ -98,6 +100,11 @@ module display(input clk,
     );
     
     assign rgb = rgb_curve_2;
+
+    always @(posedge clk) begin
+        hsync_out <= hsync;
+        vsync_out <= vsync;
+    end
     
     
 endmodule

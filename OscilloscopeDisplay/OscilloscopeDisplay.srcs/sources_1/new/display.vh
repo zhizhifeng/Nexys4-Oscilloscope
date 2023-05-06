@@ -28,7 +28,7 @@
 
 //parameters for char display
 `define CHAR_X_LEN 13
-`define CHAR_Y_LEN 12
+`define CHAR_Y_LEN 20
 `define CHAR_X_BITS 4
 `define CHAR_Y_BITS 5
 `define CHAR_BITS 7
