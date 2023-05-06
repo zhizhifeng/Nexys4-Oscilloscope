@@ -8,6 +8,7 @@ module curveDisplay#(
     input [`DISPLAY_X_BITS - 1:0] x_cnt,
     input [`DISPLAY_Y_BITS - 1:0] y_cnt,
     input signed [`DATA_IN_BITS - 1:0] data_in,
+    output reg valid,
     output reg [`RGB_BITS - 1:0] rgb,
     output [`DATA_ADDRESS_BITS - 1:0] data_address
     );
@@ -17,10 +18,12 @@ module curveDisplay#(
     assign data_address = y_cnt;
     always @(posedge clk) begin
         if (((display_position - 1) <= y_cnt) && (y_cnt <= (display_position + 1))) begin
-            rgb = (y_cnt == display_position) ? RGB : `BLACK; 
+            rgb <= (y_cnt == display_position) ? RGB : `BLACK; 
+            valid <= 1'b1;
         end
         else begin
-            rgb = `BLACK;
+            rgb <= `BLACK;
+            valid <= 1'b0;
         end
     end
 endmodule
