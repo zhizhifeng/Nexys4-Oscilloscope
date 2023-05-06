@@ -287,11 +287,11 @@ module oscilloscope#(parameter DISPLAY_X_BITS = 12,
     .triggerDisable(~positiveSlopeChannelSelected),
     .isTriggered(isTriggered)
     );
-    wire drawStarting;
     wire activeBramSelect;
     BufferSelector mybs(
     .clock(CLK108MHZ),
-    .drawStarting(drawStarting),
+    .hsync(hsync),
+    .vsync(vsync),
     .activeBramSelect(activeBramSelect)
     );
     

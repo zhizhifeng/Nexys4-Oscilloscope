@@ -22,12 +22,13 @@
 
 module BufferSelector(
     input clock,
-    input drawStarting,
+    input hsync,
+    input vsync,
     output reg activeBramSelect
     );
     
     always @(posedge clock) begin
-        if (drawStarting)
+        if (hsync == 0 && vsync == 0)
             activeBramSelect <= ~activeBramSelect;
     end
 endmodule
