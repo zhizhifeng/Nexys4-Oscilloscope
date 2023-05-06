@@ -10,18 +10,17 @@ module display(input clk,
                output hsync,
                output vsync,
                output [`RGB_BITS - 1:0] rgb,
-               output [`DATA_ADDRESS_BITS - 1:0] data_address
-               );
-
+               output [`DATA_ADDRESS_BITS - 1:0] data_address);
+    
     wire [`DATA_IN_BITS - 1:0] data_in_scaled_1;
     wire [`DATA_IN_BITS - 1:0] data_in_scaled_2;
     wire [`DISPLAY_X_BITS - 1:0] h_cnt;
     wire [`DISPLAY_Y_BITS - 1:0] v_cnt;
     wire valid;
-    wire valid_1;
-    wire valid_2;
-    wire char_valid;
-
+    wire curve_valid_1;
+    wire curve_valid_2;
+    wire info_valid;
+    
     VGA #(
     .TYPE (0)
     )
@@ -39,23 +38,33 @@ module display(input clk,
     .scale_exp      (scale_exp_1),
     .data_in_scaled (data_in_scaled_1)
     );
-
+    
     yScale u_yScale_2(
     .data_in        (data_in_2),
     .scale_exp      (scale_exp_2),
     .data_in_scaled (data_in_scaled_2)
     );
     
+    wire [`RGB_BITS - 1:0] rgb_grid;
     wire [`RGB_BITS - 1:0] rgb_info;
     wire [`RGB_BITS - 1:0] rgb_curve_1;
     wire [`RGB_BITS - 1:0] rgb_curve_2;
+    
+    gridDisplay u_gridDisplay(
+    .clk   (clk),
+    .x_cnt (h_cnt),
+    .y_cnt (v_cnt),
+    .rgb   (rgb_grid)
+    );
+    
     
     infoDisplay u_infoDisplay(
     .clk        (clk),
     .x_cnt      (h_cnt),
     .y_cnt      (v_cnt),
+    .pre_rgb    (rgb_grid),
     .rgb        (rgb_info),
-    .char_valid (char_valid)
+    .info_valid (info_valid)
     );
     
     curveDisplay#(
@@ -66,11 +75,13 @@ module display(input clk,
     .x_cnt        (h_cnt),
     .y_cnt        (v_cnt),
     .data_in      (data_in_scaled_1),
-    .rgb          (rgb_curve_1),
+    .pre_rgb      (rgb_info),
+    .pre_valid    (info_valid),
+    .rgb_out      (rgb_curve_1),
     .data_address (data_address),
-    .valid        (valid_1)
+    .valid        (curve_valid_1)
     );
-
+    
     curveDisplay#(
     .RGB (`BLUE)
     )
@@ -79,12 +90,14 @@ module display(input clk,
     .x_cnt        (h_cnt),
     .y_cnt        (v_cnt),
     .data_in      (data_in_scaled_2),
-    .rgb          (rgb_curve_2),
+    .pre_rgb      (rgb_curve_1),
+    .pre_valid    (curve_valid_1),
+    .rgb_out      (rgb_curve_2),
     .data_address (data_address),
-    .valid        (valid_2)
+    .valid        (curve_valid_2)
     );
     
-    assign rgb = (valid) ? (char_valid ? rgb_info : (valid_1 ? rgb_curve_1 : rgb_curve_2)) : `BLACK;
+    assign rgb = rgb_curve_2;
     
     
 endmodule

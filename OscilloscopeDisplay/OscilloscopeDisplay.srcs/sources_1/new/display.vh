@@ -11,17 +11,19 @@
 `define DISPLAY_X_BITS 11
 `define DISPLAY_Y_BITS 10
 `define RGB_BITS 12
+`define EX_CONST 1'b0
 `define ABS(x) ((x) > 0 ? (x) : (0 - (x)))
 
 
 //RGB
 `define RED 12'hFFF
-`define GREEN 12'h0FF
-`define BLUE 12'hF0F
+`define GREEN 12'h0F0
+`define BLUE 12'h00F
 `define YELLOW 12'hFF0
-`define CYAN 12'h0F0
-`define MAGENTA 12'hF00
+`define CYAN 12'h0FF
+`define MAGENTA 12'hF0F
 `define WHITE 12'hFFF
+`define GRAY 12'h888
 `define BLACK 12'h000
 
 //parameters for char display
