@@ -64,19 +64,6 @@ module ADC #(parameter IO_BITS = 12,
     wire signed [SAMPLE_BITS-1:0] channel1;
     wire signed [SAMPLE_BITS-1:0] channel2;
 
-
-    ila_0 your_instance_name (
-	.clk(clk), // input wire clk
-
-
-	.probe0(DRPEnable), // input wire [0:0]  probe0  
-	.probe1(DRPReady), // input wire [0:0]  probe1 
-	.probe2(endOfConversion), // input wire [0:0]  probe2 
-	.probe3(channel1), // input wire [11:0]  probe3 
-	.probe4(ADCCdataOutChannel1), // input wire [11:0]  probe4 
-	.probe5(channel2), // input wire [11:0]  probe5 
-	.probe6(ADCCdataOutChannel2) // input wire [11:0]  probe6
-);
     
     xadc_wiz_0 xadc (
     .di_in(),

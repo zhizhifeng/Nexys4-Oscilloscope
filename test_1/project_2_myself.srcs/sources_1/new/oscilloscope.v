@@ -265,6 +265,12 @@ module oscilloscope#(parameter DISPLAY_X_BITS = 12,
     wire signed [13:0] slopeChannel2;
     wire positiveSlopeChannel2;
     wire isTriggered;
+    
+    wire [SAMPLE_BITS-1:0] channelSelectedData;
+    wire positiveSlopeChannelSelected;
+    wire [SCALE_FACTOR_BITS-1:0] verticalScaleFactorTimes8ChannelSelected;
+    wire [SCALE_EXPONENT_BITS-1:0] verticalScaleExponentChannelSelected;
+    
     Totaltrigger totaltrigger(
     .risingEdgeReadyChannel1(risingEdgeReadyChannel1),
     .slopeChannel1(slopeChannel1),
@@ -274,7 +280,9 @@ module oscilloscope#(parameter DISPLAY_X_BITS = 12,
     .positiveSlopeChannel2(positiveSlopeChannel2),
     .clock(CLK108MHZ),
     .dataReady(adccRawReady),
-    .dataIn(adccRawDataOutChannel1),
+    .dataIn1(adccRawDataOutChannel1),
+    .dataIn2(adccRawDataOutChannel2),
+    .dataIn3(channelSelectedData),
     .threshold(triggerThreshold),
     .triggerDisable(~positiveSlopeChannelSelected),
     .isTriggered(isTriggered)
@@ -305,6 +313,8 @@ module oscilloscope#(parameter DISPLAY_X_BITS = 12,
     .readTriggerRelative(1),
     .readAddress(data_address),
     .dataOut(bufferDataOutChannel2));
+    
+    
     SelectChannelData mySelectChannelData
     (.clock(CLK108MHZ),
     .channel1(adccRawDataOutChannel1),
