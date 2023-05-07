@@ -22,7 +22,7 @@
 
 module yScale(
     input signed [`DATA_IN_BITS - 1:0] data_in,
-    input [`SCALE_BITS - 1:0] scale_exp,
+    input [`H_SCALE_BITS - 1:0] scale_exp,
     output signed [`DATA_IN_BITS - 1:0] data_in_scaled
     );
     wire [`DATA_IN_BITS - 1:0] data_in_abs;

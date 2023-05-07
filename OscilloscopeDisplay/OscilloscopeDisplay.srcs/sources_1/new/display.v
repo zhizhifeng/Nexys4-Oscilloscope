@@ -3,10 +3,16 @@
 
 module display(input clk,
                input reset,
+               input trigger_channel,
                input [`DATA_IN_BITS - 1:0] data_in_1,
                input [`DATA_IN_BITS - 1:0] data_in_2,
-               input [`SCALE_BITS - 1:0] scale_exp_1,
-               input [`SCALE_BITS - 1:0] scale_exp_2,
+               input [`H_SCALE_BITS - 1:0] h_scale,
+               input [`V_SCALE_BITS - 1:0] v_scale_1,
+               input [`V_SCALE_BITS - 1:0] v_scale_2,
+               input [`DATA_IN_BITS - 1:0] data_in_1_max,
+               input [`DATA_IN_BITS - 1:0] data_in_2_max,
+               input [`DATA_IN_BITS - 1:0] data_in_1_min,
+               input [`DATA_IN_BITS - 1:0] data_in_2_min,
                output reg hsync_out,
                output reg vsync_out,
                output [`RGB_BITS - 1:0] rgb,
@@ -37,13 +43,13 @@ module display(input clk,
     );
     yScale u_yScale_1(
     .data_in        (data_in_1),
-    .scale_exp      (scale_exp_1),
+    .scale_exp      (v_scale_1),
     .data_in_scaled (data_in_scaled_1)
     );
     
     yScale u_yScale_2(
     .data_in        (data_in_2),
-    .scale_exp      (scale_exp_2),
+    .scale_exp      (v_scale_2),
     .data_in_scaled (data_in_scaled_2)
     );
     
@@ -59,15 +65,22 @@ module display(input clk,
     .rgb   (rgb_grid)
     );
     
-    
     infoDisplay u_infoDisplay(
-    .clk        (clk),
-    .x_cnt      (h_cnt),
-    .y_cnt      (v_cnt),
-    .pre_rgb    (rgb_grid),
-    .rgb        (rgb_info),
-    .info_valid (info_valid)
+    .clk             (clk),
+    .trigger_channel (trigger_channel),
+    .v_scale_1       (v_scale_1),
+    .v_scale_2       (v_scale_2),
+    .data_in_1_max   (data_in_1_max),
+    .data_in_2_max   (data_in_2_max),
+    .data_in_1_min   (data_in_1_min),
+    .data_in_2_min   (data_in_2_min),
+    .x_cnt           (h_cnt),
+    .y_cnt           (v_cnt),
+    .pre_rgb         (rgb_grid),
+    .rgb_out         (rgb_info),
+    .info_valid      (info_valid)
     );
+    
     
     curveDisplay#(
     .RGB (`YELLOW)
@@ -100,7 +113,7 @@ module display(input clk,
     );
     
     assign rgb = rgb_curve_2;
-
+    
     always @(posedge clk) begin
         hsync_out <= hsync;
         vsync_out <= vsync;

@@ -3,7 +3,8 @@
 
 `define DATA_IN_BITS 12
 `define DATA_ADDRESS_BITS 12
-`define SCALE_BITS 4
+`define H_SCALE_BITS 6
+`define V_SCALE_BITS 4
 
 //parameters for display
 `define DISPLAY_X_LEN 1280
@@ -12,6 +13,7 @@
 `define DISPLAY_Y_BITS 10
 `define RGB_BITS 12
 `define EX_CONST 1'b0
+`define EX_CONST_1 0
 `define ABS(x) ((x) > 0 ? (x) : (0 - (x)))
 
 
