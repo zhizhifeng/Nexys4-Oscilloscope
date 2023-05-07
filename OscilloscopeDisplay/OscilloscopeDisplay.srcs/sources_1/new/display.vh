@@ -4,7 +4,7 @@
 `define DATA_IN_BITS 12
 `define DATA_ADDRESS_BITS 12
 `define H_SCALE_BITS 6
-`define V_SCALE_BITS 4
+`define V_SCALE_BITS 3
 
 //parameters for display
 `define DISPLAY_X_LEN 1280

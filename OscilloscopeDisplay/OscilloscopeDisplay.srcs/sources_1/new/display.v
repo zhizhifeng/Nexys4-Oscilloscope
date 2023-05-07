@@ -13,6 +13,7 @@ module display(input clk,
                input [`DATA_IN_BITS - 1:0] data_in_2_max,
                input [`DATA_IN_BITS - 1:0] data_in_1_min,
                input [`DATA_IN_BITS - 1:0] data_in_2_min,
+               input [`DATA_IN_BITS - 1:0] tri_threshold,
                output reg hsync_out,
                output reg vsync_out,
                output [`RGB_BITS - 1:0] rgb,
@@ -64,16 +65,19 @@ module display(input clk,
     .y_cnt (v_cnt),
     .rgb   (rgb_grid)
     );
-    
+
     infoDisplay u_infoDisplay(
     .clk             (clk),
     .trigger_channel (trigger_channel),
+    .h_scale         (h_scale),
     .v_scale_1       (v_scale_1),
     .v_scale_2       (v_scale_2),
     .data_in_1_max   (data_in_1_max),
     .data_in_2_max   (data_in_2_max),
     .data_in_1_min   (data_in_1_min),
     .data_in_2_min   (data_in_2_min),
+    .tri_threshold   (tri_threshold),
+    
     .x_cnt           (h_cnt),
     .y_cnt           (v_cnt),
     .pre_rgb         (rgb_grid),
@@ -98,7 +102,7 @@ module display(input clk,
     );
     
     curveDisplay#(
-    .RGB (`BLUE)
+    .RGB (`CYAN)
     )
     u_curveDisplay_2(
     .clk          (clk),
