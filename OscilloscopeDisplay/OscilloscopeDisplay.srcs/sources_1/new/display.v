@@ -18,7 +18,7 @@ module display(input clk,
                output reg vsync_out,
                output [`RGB_BITS - 1:0] rgb,
                output [`DATA_ADDRESS_BITS - 1:0] data_address);
-    
+
     wire [`DATA_IN_BITS - 1:0] data_in_scaled_1;
     wire [`DATA_IN_BITS - 1:0] data_in_scaled_2;
     wire [`DISPLAY_X_BITS - 1:0] h_cnt;
@@ -29,7 +29,7 @@ module display(input clk,
     wire info_valid;
     wire hsync;
     wire vsync;
-    
+
     VGA #(
     .TYPE (0)
     )
@@ -47,18 +47,18 @@ module display(input clk,
     .scale_exp      (v_scale_1),
     .data_in_scaled (data_in_scaled_1)
     );
-    
+
     yScale u_yScale_2(
     .data_in        (data_in_2),
     .scale_exp      (v_scale_2),
     .data_in_scaled (data_in_scaled_2)
     );
-    
+
     wire [`RGB_BITS - 1:0] rgb_grid;
     wire [`RGB_BITS - 1:0] rgb_info;
     wire [`RGB_BITS - 1:0] rgb_curve_1;
     wire [`RGB_BITS - 1:0] rgb_curve_2;
-    
+
     gridDisplay u_gridDisplay(
     .clk   (clk),
     .x_cnt (h_cnt),
@@ -84,8 +84,7 @@ module display(input clk,
     .rgb_out         (rgb_info),
     .info_valid      (info_valid)
     );
-    
-    
+
     curveDisplay#(
     .RGB (`YELLOW)
     )
@@ -100,7 +99,7 @@ module display(input clk,
     .data_address (data_address),
     .valid        (curve_valid_1)
     );
-    
+
     curveDisplay#(
     .RGB (`CYAN)
     )
@@ -115,9 +114,9 @@ module display(input clk,
     .data_address (data_address),
     .valid        (curve_valid_2)
     );
-    
+
     assign rgb = rgb_curve_2;
-    
+
     always @(posedge clk) begin
         hsync_out <= hsync;
         vsync_out <= vsync;

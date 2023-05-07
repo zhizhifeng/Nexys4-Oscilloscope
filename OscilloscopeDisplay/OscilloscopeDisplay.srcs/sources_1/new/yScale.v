@@ -6,6 +6,7 @@ module yScale(
     input [`V_SCALE_BITS - 1:0] scale_exp,
     output signed [`DATA_IN_BITS - 1:0] data_in_scaled
     );
+
     wire [`DATA_IN_BITS - 1:0] data_in_abs;
     wire [`DATA_IN_BITS - 1:0] data_in_abs_scaled;
 

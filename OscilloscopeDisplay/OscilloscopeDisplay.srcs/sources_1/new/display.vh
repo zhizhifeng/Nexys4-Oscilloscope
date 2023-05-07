@@ -16,7 +16,6 @@
 `define EX_CONST_1 0
 `define ABS(x) ((x) > 0 ? (x) : (0 - (x)))
 
-
 //RGB
 `define RED 12'hFFF
 `define GREEN 12'h0F0
