@@ -1,0 +1,1 @@
+`define OPERATE(x) (($signed(x) * 1000) >>12)

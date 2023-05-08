@@ -23,7 +23,7 @@
 module ADCcontroller
    #(parameter IO_BITS = 12,
                 NUMERATOR_SCALE_FACTOR = 11'sd1000,
-                DENOMINATOR_RIGHT_SHIFT = 10,
+                DENOMINATOR_RIGHT_SHIFT = 12,
                NUMERATOR_SCALED_DATA_BITS = 22)
    (
     input clock,

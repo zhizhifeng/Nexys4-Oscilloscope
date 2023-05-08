@@ -1,25 +1,5 @@
 `timescale 1ns / 1ps
 `include "display.vh"
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2023/05/04 18:56:16
-// Design Name: 
-// Module Name: charDisplay
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module charDisplay#(parameter RGB = `WHITE)
                    (input [`DISPLAY_X_BITS - 1:0] x_cnt,
@@ -29,22 +9,22 @@ module charDisplay#(parameter RGB = `WHITE)
                     input [`CHAR_BITS - 1:0] char_data,
                     input [`CHAR_BITS - 1:0] pre_char_data,
                     input [`RGB_BITS - 1:0] pre_rgb,
-                    input [`CHAR_X_BITS - 1:0] pre_row_addr,
-                    input [`CHAR_Y_BITS - 1:0] pre_col_addr,
+                    input [`CHAR_Y_BITS - 1:0] pre_row_addr,
+                    input [`CHAR_X_BITS - 1:0] pre_col_addr,
                     output reg char_valid,
-                    output [`CHAR_X_BITS - 1:0] row_addr_out,
-                    output [`CHAR_Y_BITS - 1:0] col_addr_out,
+                    output [`CHAR_Y_BITS - 1:0] row_addr_out,
+                    output [`CHAR_X_BITS - 1:0] col_addr_out,
                     output [`CHAR_BITS - 1:0] char_data_out,
                     output [`RGB_BITS - 1:0] rgb_out);
     
-    reg [`CHAR_X_BITS - 1:0] row_addr;
-    reg [`CHAR_Y_BITS - 1:0] col_addr;
+    reg [`CHAR_Y_BITS - 1:0] row_addr;
+    reg [`CHAR_X_BITS - 1:0] col_addr;
     
     always @(*) begin
         if (x_position <= x_cnt && x_cnt < (x_position + `CHAR_X_LEN) && y_position <= y_cnt && y_cnt < (y_position + `CHAR_Y_LEN)) begin
             char_valid <= 1'b1;
-            row_addr   <= x_cnt - x_position;
-            col_addr   <= y_cnt - y_position;
+            col_addr   <= x_cnt - x_position;
+            row_addr   <= y_cnt - y_position;
             end else begin
             char_valid <= 1'b0;
             row_addr   <= 0;
@@ -57,4 +37,3 @@ module charDisplay#(parameter RGB = `WHITE)
     assign row_addr_out  = char_valid ? row_addr : pre_row_addr;
     assign col_addr_out  = char_valid ? col_addr : pre_col_addr;
 endmodule
-
