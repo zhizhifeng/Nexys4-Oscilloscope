@@ -1,5 +1,6 @@
-
-`define VERTICAL_ZERO 500 //TODO: implement adjustable zero point
+//TODO: implement adjustable zero point
+`define VERTICAL_ZERO 500
+`define HORIZONTAL_ZERO 640
 
 `define DATA_IN_BITS 12
 `define DATA_ADDRESS_BITS 12

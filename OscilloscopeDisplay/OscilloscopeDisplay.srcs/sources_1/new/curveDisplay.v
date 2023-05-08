@@ -17,12 +17,12 @@ module curveDisplay#(
     wire [`DISPLAY_Y_BITS - 1:0] display_position;
     reg [`RGB_BITS - 1:0] rgb;
 
-    assign display_position = `VERTICAL_ZERO + data_in;
+    assign display_position = `VERTICAL_ZERO - data_in;
     assign data_address = {1'b0, x_cnt};
     assign rgb_out = valid ? rgb : pre_rgb;
 
     always @(posedge clk) begin
-        if (((display_position - 1) <= y_cnt) && (y_cnt <= (display_position + 1))) begin
+        if (((display_position - `EX_CONST) <= y_cnt) && (y_cnt <= (display_position + `EX_CONST))) begin
             rgb <= RGB; 
             valid <= 1'b1;
         end

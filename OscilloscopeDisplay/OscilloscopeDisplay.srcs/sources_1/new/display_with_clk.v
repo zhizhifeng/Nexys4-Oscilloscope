@@ -42,7 +42,8 @@ module display_with_clk(input clk,
     .vsync_out       (vsync),
     .rgb             (rgb),
     .data_address    (data_address),
-    .refresh ()
+    .refresh (),
+    .xy_enable(data_in[0])
     );
     
     clk_wiz_0 u_clk_wiz_0
