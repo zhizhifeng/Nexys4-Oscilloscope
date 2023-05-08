@@ -14,6 +14,7 @@ module display(input clk,
                input [`DATA_IN_BITS - 1:0] data_in_1_min,
                input [`DATA_IN_BITS - 1:0] data_in_2_min,
                input [`DATA_IN_BITS - 1:0] tri_threshold,
+               output refresh,
                output reg hsync_out,
                output reg vsync_out,
                output [`RGB_BITS - 1:0] rgb,
@@ -122,5 +123,6 @@ module display(input clk,
         vsync_out <= vsync;
     end
     
+    assign refresh = (h_cnt == 0) && (v_cnt == 0);
     
 endmodule
