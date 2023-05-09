@@ -91,7 +91,6 @@ module oscilloscope#(parameter
     wire signed [11:0] ADCCdataOutChannel2;
     wire signed [11:0] adccRawDataOutChannel2;
     ADC adc(
-    .channelDataReady(channelDataReady),
     .state(state),
     .previousState(previousState),
     .adcc_ready(adcc_ready),
@@ -112,15 +111,11 @@ module oscilloscope#(parameter
     .vauxn3(vauxn3),
     .vauxp11(vauxp11),
     .vauxn11(vauxn11),
-    .samplePeriod(samplePeriod),
-    .dataOutChannel1(ADCCdataOutChannel1),
-    .rawDataOutChannel1(adccRawDataOutChannel1),
-    .dataOutChannel2(ADCCdataOutChannel2),
-    .rawDataOutChannel2(adccRawDataOutChannel2),
-    .ready(adcc_ready),
-    .rawReady(adccRawReady)
+    .samplePeriod(samplePeriod)
+    
     );
     
+   
     wire risingEdgeReadyChannel1;
     wire signed [13:0] slopeChannel1;
     wire positiveSlopeChannel1;
@@ -233,17 +228,8 @@ measure signal2(
                 .signalMin1(min2)
                 );
               
-                ila_0 your_instance_name (
-	.clk(CLK108MHZ), // input wire clk
-
-
-	.probe0(min2), // input wire [11:0]  probe0  
-	.probe1(min1), // input wire [11:0]  probe1 
-	.probe2(bufferDataOutChannel1), // input wire [11:0]  probe2 
-	.probe3(bufferDataOutChannel2), // input wire [11:0]  probe3 
-	.probe4(isTriggered), // input wire [0:0]  probe4 
-	.probe5(activeBramSelect) // input wire [0:0]  probe5
-);
-
+       
+      
+	
                 
 endmodule
