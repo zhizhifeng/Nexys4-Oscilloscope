@@ -15,7 +15,7 @@ module xyDisplay#(parameter RGB = `GREEN)
 
     wire [`DATA_IN_BITS - 1:0] x_position;
     wire [`DATA_IN_BITS - 1:0] y_position;
-    wire x_cnt_delay;
+    wire [`DISPLAY_X_BITS - 1:0] x_cnt_delay;
     reg [`DISPLAY_X_LEN - 1:0] row_buffer [0:1];
     reg buffer_switch = 0;
 
