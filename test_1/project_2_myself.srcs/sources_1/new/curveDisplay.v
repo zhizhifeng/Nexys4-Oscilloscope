@@ -22,7 +22,7 @@ module curveDisplay#(
     assign rgb_out = valid ? rgb : pre_rgb;
 
     always @(posedge clk) begin
-        if (((display_position - 1) <= y_cnt) && (y_cnt <= (display_position + 1))) begin
+        if (((display_position - `EX_CONST) <= y_cnt) && (y_cnt <= (display_position + `EX_CONST))) begin
             rgb <= RGB; 
             valid <= 1'b1;
         end

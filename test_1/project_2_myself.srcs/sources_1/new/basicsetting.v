@@ -37,7 +37,7 @@ module basicsetting
      output reg channelSelected,
      output reg [2:0]scale_exp1=0,
      output reg [2:0]scale_exp2=0,
-     output reg xyenable=0
+     output reg xyenable
      );
      always @(posedge clock) begin
                  triggerThreshold1 <=(triggerThreshold*1000)>>12;
@@ -66,7 +66,7 @@ module basicsetting
             4'b0011:
             xyenable=1;
             default:
-            ;
+           xyenable=0 ;
             endcase  
             end   
 endmodule

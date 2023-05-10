@@ -190,6 +190,7 @@ module oscilloscope#(parameter
     display u_display(
     .clk             (CLK108MHZ),
     .reset           (~reset),
+    .xy_enable(xyenable),
     .trigger_channel (channelSelected),
     .data_in_1       (bufferDataOutChannel1),
     .data_in_2       (bufferDataOutChannel2),
@@ -212,7 +213,7 @@ module oscilloscope#(parameter
 measure signal1(
                 .clock(CLK108MHZ),
                 .dataReady(adccRawReady),
-                .dataIn(ADCCdataOutChannel1),              
+                .dataIn(adccRawDataOutChannel1),              
                 .signalMax(MaxChannel1),
                 .signalMin(MinChannel1),
                 .signalMax1(max1),
@@ -221,7 +222,7 @@ measure signal1(
 measure signal2(
                 .clock(CLK108MHZ),
                 .dataReady(adccRawReady),
-                .dataIn(ADCCdataOutChannel2),              
+                .dataIn(adccRawDataOutChanne2),              
                 .signalMax(MaxChannel2),
                 .signalMin(MinChannel2),
                 .signalMax1(max2),
