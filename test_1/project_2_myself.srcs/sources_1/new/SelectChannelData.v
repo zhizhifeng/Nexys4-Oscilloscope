@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2023/04/20 23:27:59
-// Design Name: 
-// Module Name: SelectChannelData
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module SelectChannelData
     #(parameter SAMPLE_BITS = 12,
@@ -31,7 +11,7 @@ module SelectChannelData
     input positiveSlopeChannel2,
     input channelSelected,
     output reg [SAMPLE_BITS-1:0] channelSelectedData,
-    output reg positiveSlopeChannelSelected
+    output reg positiveSlopeChannelSelected=0
     
     );
     

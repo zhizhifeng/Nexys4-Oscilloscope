@@ -1,34 +1,14 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2023/04/25 22:19:29
-// Design Name: 
-// Module Name: Totaltrigger
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module Totaltrigger
 #(parameter DATA_BITS = 12
      )
 (
 output risingEdgeReadyChannel1,
-    output signed [13:0] slopeChannel1,
+    output signed [11:0] slopeChannel1,
   output  positiveSlopeChannel1,
    output risingEdgeReadyChannel2,
-   output  signed [13:0] slopeChannel2,
+   output  signed [11:0] slopeChannel2,
     output positiveSlopeChannel2,
 input clock,
    input dataReady,

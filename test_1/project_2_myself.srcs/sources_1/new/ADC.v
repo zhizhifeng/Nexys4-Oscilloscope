@@ -1,25 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2023/04/25 21:03:04
-// Design Name:
-// Module Name: ADC
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
-
 module ADC #(parameter IO_BITS = 12,
              SAMPLE_BITS = 12,
              TOGGLE_CHANNELS_STATE_BITS = 2,
@@ -31,13 +10,7 @@ module ADC #(parameter IO_BITS = 12,
              input vauxn3,
              input clk,
              input reset,
-             input vp_in,
-             input vn_in,
-             input di_in,
-             input daddr_in,
-             input den_in,
-             input dwe_in,
-             input samplePeriod,
+             input [5:0] samplePeriod,
              output [TOGGLE_CHANNELS_STATE_BITS-1:0] state,
              output [TOGGLE_CHANNELS_STATE_BITS-1:0] previousState,
              output adcc_ready,
@@ -76,7 +49,7 @@ module ADC #(parameter IO_BITS = 12,
     .vauxp11(vauxp11),
     .vauxn11(vauxn11),
     .channel_out(),
-    .eoc_out(endOfConversion),//×ª»»ÐÅºÅ½áÊø±êÖ¾
+    .eoc_out(endOfConversion),//×ªï¿½ï¿½ï¿½ÅºÅ½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾
     .alarm_out(),
     .eos_out(),
     .busy_out()

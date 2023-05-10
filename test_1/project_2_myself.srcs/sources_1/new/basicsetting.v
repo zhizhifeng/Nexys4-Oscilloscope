@@ -1,25 +1,5 @@
 `timescale 1ns / 1ps
 `include "operate.vh"
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2023/05/06 19:23:14
-// Design Name: 
-// Module Name: basicsetting
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module basicsetting
 #(parameter DATA_BITS = 12, SAMPLE_PERIOD_BITS = 6, SCALE_FACTOR_SIZE = 10,
@@ -34,10 +14,10 @@ module basicsetting
       output reg signed [DATA_BITS-1:0]triggerThreshold = 0,
       output reg signed [DATA_BITS-1:0]triggerThreshold1 = 0,
       output reg [SAMPLE_PERIOD_BITS-1:0]samplePeriod = 0,
-     output reg channelSelected,
+     output reg channelSelected=0,
      output reg [2:0]scale_exp1=0,
      output reg [2:0]scale_exp2=0,
-     output reg xyenable
+     output reg xyenable=0
      );
      always @(posedge clock) begin
                  triggerThreshold1 <=(triggerThreshold*1000)>>12;

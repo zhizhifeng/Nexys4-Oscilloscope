@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2023/04/20 16:02:27
-// Design Name: 
-// Module Name: buffer
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module buffer #(parameter LOG_SAMPLES=12, SAMPLE_SIZE=12)
               (input clock, input ready, input signed [SAMPLE_SIZE-1:0]dataIn,
@@ -28,19 +8,19 @@ module buffer #(parameter LOG_SAMPLES=12, SAMPLE_SIZE=12)
                input signed [LOG_SAMPLES-1:0]readAddress,
                output reg signed [SAMPLE_SIZE-1:0]dataOut);
 
-    reg [LOG_SAMPLES-1:0] pointer0; 
-    reg [LOG_SAMPLES-1:0] pointer1;
-    reg [LOG_SAMPLES-1:0] trigger_address0;
-    reg [LOG_SAMPLES-1:0] trigger_address1;
+    reg [LOG_SAMPLES-1:0] pointer0=0; 
+    reg [LOG_SAMPLES-1:0] pointer1=0;
+    reg [LOG_SAMPLES-1:0] trigger_address0=0;
+    reg [LOG_SAMPLES-1:0] trigger_address1=0;
     
     wire [LOG_SAMPLES-1:0] addressAllOnes;
     assign addressAllOnes = 'hFFFFFFFFFFF; 
 
     
-    reg ram0_we;
-    reg [LOG_SAMPLES-1:0] ram0_addra;
-    reg [SAMPLE_SIZE-1:0] ram0_din;
-    reg [LOG_SAMPLES-1:0] ram0_addrb;
+    reg ram0_we=0;
+    reg [LOG_SAMPLES-1:0] ram0_addra=0;
+    reg [SAMPLE_SIZE-1:0] ram0_din=0;
+    reg [LOG_SAMPLES-1:0] ram0_addrb=0;
     wire [SAMPLE_SIZE-1:0] ram0_dout;
     
     blk_mem_gen_0 bram0 (
@@ -58,10 +38,10 @@ module buffer #(parameter LOG_SAMPLES=12, SAMPLE_SIZE=12)
       .doutb(ram0_dout) 
     );
     
-    reg ram1_we;
-    reg [LOG_SAMPLES-1:0] ram1_addra;
-    reg [SAMPLE_SIZE-1:0] ram1_din;
-    reg [LOG_SAMPLES-1:0] ram1_addrb;
+    reg ram1_we=0;
+    reg [LOG_SAMPLES-1:0] ram1_addra=0;
+    reg [SAMPLE_SIZE-1:0] ram1_din=0;
+    reg [LOG_SAMPLES-1:0] ram1_addrb=0;
     wire [SAMPLE_SIZE-1:0] ram1_dout;
     blk_mem_gen_1 bram1 (
           .clka(clock),   

@@ -56,8 +56,7 @@ module ADCcontroller
                 dataOutChannel2 <= dataInChannel2NumeratorScaled >>> DENOMINATOR_RIGHT_SHIFT; 
                 sampleClock <= 0;
             end 
-            else
-                sampleClock <= sampleClock + 1;
+            else    sampleClock <= sampleClock + 1;
             rawReady <= 1;
             rawDataOutChannel1 <= dataInChannel1;
             rawDataOutChannel2 <= dataInChannel2;
@@ -75,13 +74,4 @@ module ADCcontroller
             dataOutChannel2 <= 0;
         end
     end
-    ila_0 your_instance_name (
-	.clk(clock
-	), // input wire clk
-
-
-	.probe0(dataInChannel1), // input wire [11:0]  probe0  
-	.probe1(dataOutChannel1), // input wire [11:0]  probe1 
-	.probe2(dataInChannel1NumeratorScaled) // input wire [21:0]  probe2
-);
 endmodule

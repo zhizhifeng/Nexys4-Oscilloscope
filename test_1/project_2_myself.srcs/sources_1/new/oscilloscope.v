@@ -1,33 +1,10 @@
 `timescale 1ns / 1ps
 `include "display.vh"
 
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 2023/04/18 19:28:01
-// Design Name:
-// Module Name: oscilloscope
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
-
-module oscilloscope#(parameter                                       
-                     DRP_ADDRESS_BITS = 7,
+module oscilloscope#(parameter DRP_ADDRESS_BITS = 7,
                      DRP_SAMPLE_BITS = 16,
                      SAMPLE_BITS = 12,
-                     TOGGLE_CHANNELS_STATE_BITS = 2                                       
-                     )
+                     TOGGLE_CHANNELS_STATE_BITS = 2)
                     (input CLK100MHZ,
                      input vauxp11,
                      input vauxn11,
@@ -61,27 +38,19 @@ module oscilloscope#(parameter
     wire signed [11:0] triggerThreshold1;
     wire [5:0] samplePeriod;
     wire channelSelected;
-    wire [3:0] scale_exp1;
-     wire [3:0] scale_exp2;
-     wire xyenable;
-   basicsetting basicsetting (.clock(CLK108MHZ), .sw(SW[15:0]),
-    .btnu(BTNU), .btnd(BTND), .btnc(BTNC), .btnl(BTNL),  
-    .triggerThreshold(triggerThreshold), 
+    wire [2:0] scale_exp1;
+    wire [2:0] scale_exp2;
+    wire xyenable;
+    basicsetting basicsetting (.clock(CLK108MHZ), .sw(SW[15:0]),
+    .btnu(BTNU), .btnd(BTND), .btnc(BTNC), .btnl(BTNL),
+    .triggerThreshold(triggerThreshold),
     .triggerThreshold1(triggerThreshold1),
     .samplePeriod(samplePeriod), .channelSelected(channelSelected),
     .scale_exp1(scale_exp1),
     .scale_exp2(scale_exp2),
     .xyenable(xyenable)
     );
-
-    wire [DRP_ADDRESS_BITS-1:0] DRPAddress;
-    wire DRPEnable;
-    wire DRPWriteEnable;
-    wire DRPReady;
-    wire signed [DRP_SAMPLE_BITS-1:0] DRPDataOut;
-    wire endOfConversion;
-    
-    wire channelDataReady;
+        
     wire [TOGGLE_CHANNELS_STATE_BITS-1:0] state;
     wire [TOGGLE_CHANNELS_STATE_BITS-1:0] previousState;
     wire adcc_ready;
@@ -99,14 +68,8 @@ module oscilloscope#(parameter
     .adccRawDataOutChannel1(adccRawDataOutChannel1),
     .ADCCdataOutChannel2(ADCCdataOutChannel2),
     .adccRawDataOutChannel2(adccRawDataOutChannel2),
-    .di_in(),
-    .daddr_in(DRPAddress),
-    .den_in(DRPEnable),
-    .dwe_in(DRPWriteEnable),
     .clk(CLK108MHZ),
     .reset(reset),
-    .vp_in(),
-    .vn_in(),
     .vauxp3(vauxp3),
     .vauxn3(vauxn3),
     .vauxp11(vauxp11),
@@ -115,18 +78,18 @@ module oscilloscope#(parameter
     
     );
     
-   
+    
     wire risingEdgeReadyChannel1;
-    wire signed [13:0] slopeChannel1;
+    wire signed [11:0] slopeChannel1;
     wire positiveSlopeChannel1;
     wire risingEdgeReadyChannel2;
-    wire signed [13:0] slopeChannel2;
+    wire signed [11:0] slopeChannel2;
     wire positiveSlopeChannel2;
     wire isTriggered;
     
     wire [SAMPLE_BITS-1:0] channelSelectedData;
     wire positiveSlopeChannelSelected;
- 
+    
     Totaltrigger totaltrigger(
     .risingEdgeReadyChannel1(risingEdgeReadyChannel1),
     .slopeChannel1(slopeChannel1),
@@ -147,7 +110,7 @@ module oscilloscope#(parameter
     wire refresh;
     BufferSelector mybs(
     .clock(CLK108MHZ),
-   .refresh(refresh),
+    .refresh(refresh),
     .activeBramSelect(activeBramSelect)
     );
     
@@ -174,15 +137,15 @@ module oscilloscope#(parameter
     .channel1(adccRawDataOutChannel1),
     .channel2(adccRawDataOutChannel2),
     .positiveSlopeChannel1(positiveSlopeChannel1),
-    .positiveSlopeChannel2(positiveSlopeChannel2),    
+    .positiveSlopeChannel2(positiveSlopeChannel2),
     .channelSelected(channelSelected),
     .channelSelectedData(channelSelectedData),
     .positiveSlopeChannelSelected(positiveSlopeChannelSelected)
     );
-    wire signed[11:0]Maxchannel1;
-    wire signed[11:0]Maxchannel2;
-    wire signed[11:0]Minchannel1;
-    wire signed[11:0]Minchannel2;
+    wire signed[11:0]MaxChannel1;
+    wire signed[11:0]MaxChannel2;
+    wire signed[11:0]MinChannel1;
+    wire signed[11:0]MinChannel2;
     wire signed[11:0]max1;
     wire signed[11:0]max2;
     wire signed[11:0]min1;
@@ -197,10 +160,10 @@ module oscilloscope#(parameter
     .h_scale         (samplePeriod),
     .v_scale_1       (scale_exp1),
     .v_scale_2       (scale_exp2),
-    .data_in_1_max   (max1),
-    .data_in_2_max   (max2),
-    .data_in_1_min   (min1),
-    .data_in_2_min   (min2),
+    .data_in_1_max   (MaxChannel1),
+    .data_in_2_max   (MaxChannel2),
+    .data_in_1_min   (MinChannel1),
+    .data_in_2_min   (MinChannel2),
     .tri_threshold(triggerThreshold1),
     .refresh(refresh),
     .hsync_out       (hsync),
@@ -210,27 +173,27 @@ module oscilloscope#(parameter
     );
     
     
-measure signal1(
-                .clock(CLK108MHZ),
-                .dataReady(adccRawReady),
-                .dataIn(adccRawDataOutChannel1),              
-                .signalMax(MaxChannel1),
-                .signalMin(MinChannel1),
-                .signalMax1(max1),
-                .signalMin1(min1)
-                );
-measure signal2(
-                .clock(CLK108MHZ),
-                .dataReady(adccRawReady),
-                .dataIn(adccRawDataOutChanne2),              
-                .signalMax(MaxChannel2),
-                .signalMin(MinChannel2),
-                .signalMax1(max2),
-                .signalMin1(min2)
-                );
-              
-       
-      
-	
-                
+    measure signal1(
+    .clock(CLK108MHZ),
+    .dataReady(adccRawReady),
+    .dataIn(adccRawDataOutChannel1),
+    .signalMax(MaxChannel1),
+    .signalMin(MinChannel1),
+    .signalMax1(max1),
+    .signalMin1(min1)
+    );
+    measure signal2(
+    .clock(CLK108MHZ),
+    .dataReady(adccRawReady),
+    .dataIn(adccRawDataOutChannel2),
+    .signalMax(MaxChannel2),
+    .signalMin(MinChannel2),
+    .signalMax1(max2),
+    .signalMin1(min2)
+    );
+    
+    
+    
+    
+    
 endmodule
