@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="display_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="display_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="3,999,699.998 ns"></ZoomStartTime>
+      <ZoomEndTime time="4,000,059.799 ns"></ZoomEndTime>
+      <Cursor1Time time="3,379,595.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="362"></NameColumnWidth>
+      <ValueColumnWidth column_width="132"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="23" />
+   <wvobject fp_name="/display_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/data_in" type="array">
+      <obj_property name="ElementShortName">data_in[11:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/scale_exp" type="array">
+      <obj_property name="ElementShortName">scale_exp[3:0]</obj_property>
+      <obj_property name="ObjectShortName">scale_exp[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/h_cnt" type="array">
+      <obj_property name="ElementShortName">h_cnt[10:0]</obj_property>
+      <obj_property name="ObjectShortName">h_cnt[10:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/hsync" type="logic">
+      <obj_property name="ElementShortName">hsync</obj_property>
+      <obj_property name="ObjectShortName">hsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/v_cnt" type="array">
+      <obj_property name="ElementShortName">v_cnt[9:0]</obj_property>
+      <obj_property name="ObjectShortName">v_cnt[9:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/vsync" type="logic">
+      <obj_property name="ElementShortName">vsync</obj_property>
+      <obj_property name="ObjectShortName">vsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/rgb" type="array">
+      <obj_property name="ElementShortName">rgb[11:0]</obj_property>
+      <obj_property name="ObjectShortName">rgb[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/data_address" type="array">
+      <obj_property name="ElementShortName">data_address[11:0]</obj_property>
+      <obj_property name="ObjectShortName">data_address[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_infoDisplay/char_valid" type="logic">
+      <obj_property name="ElementShortName">char_valid</obj_property>
+      <obj_property name="ObjectShortName">char_valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_infoDisplay/rgb" type="array">
+      <obj_property name="ElementShortName">rgb[11:0]</obj_property>
+      <obj_property name="ObjectShortName">rgb[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_yScale/data_in_abs" type="array">
+      <obj_property name="ElementShortName">data_in_abs[11:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_abs[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_yScale/data_in_abs_scaled" type="array">
+      <obj_property name="ElementShortName">data_in_abs_scaled[11:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_abs_scaled[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_yScale/data_in_scaled" type="array">
+      <obj_property name="ElementShortName">data_in_scaled[11:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_scaled[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_curveDisplay/RGB" type="array">
+      <obj_property name="ElementShortName">RGB[11:0]</obj_property>
+      <obj_property name="ObjectShortName">RGB[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_infoDisplay/rgb_1" type="array">
+      <obj_property name="ElementShortName">rgb_1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">rgb_1[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_infoDisplay/rgb_2" type="array">
+      <obj_property name="ElementShortName">rgb_2[11:0]</obj_property>
+      <obj_property name="ObjectShortName">rgb_2[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_infoDisplay/char_valid_1" type="logic">
+      <obj_property name="ElementShortName">char_valid_1</obj_property>
+      <obj_property name="ObjectShortName">char_valid_1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_infoDisplay/char_valid_2" type="logic">
+      <obj_property name="ElementShortName">char_valid_2</obj_property>
+      <obj_property name="ObjectShortName">char_valid_2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/u_VGA/valid" type="logic">
+      <obj_property name="ElementShortName">valid</obj_property>
+      <obj_property name="ObjectShortName">valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/rgb_curve" type="array">
+      <obj_property name="ElementShortName">rgb_curve[11:0]</obj_property>
+      <obj_property name="ObjectShortName">rgb_curve[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/display_tb/u_display/rgb_info" type="array">
+      <obj_property name="ElementShortName">rgb_info[11:0]</obj_property>
+      <obj_property name="ObjectShortName">rgb_info[11:0]</obj_property>
+   </wvobject>
+</wave_config>
