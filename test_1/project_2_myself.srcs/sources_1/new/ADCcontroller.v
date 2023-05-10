@@ -43,16 +43,16 @@ module ADCcontroller
     
     reg [15:0]sampleClock = 0;
     
-    wire [NUMERATOR_SCALED_DATA_BITS-1:0] dataInChannel1NumeratorScaled;
+    wire signed [NUMERATOR_SCALED_DATA_BITS-1:0] dataInChannel1NumeratorScaled;
     assign dataInChannel1NumeratorScaled = dataInChannel1 * NUMERATOR_SCALE_FACTOR;
-    wire [NUMERATOR_SCALED_DATA_BITS-1:0] dataInChannel2NumeratorScaled;
+    wire signed [NUMERATOR_SCALED_DATA_BITS-1:0] dataInChannel2NumeratorScaled;
     assign dataInChannel2NumeratorScaled = dataInChannel2 * NUMERATOR_SCALE_FACTOR;
      always @(posedge clock) begin
        
         if (!reset && sampleEnabled && inputReady) begin
             if (sampleClock >= samplePeriod) begin
                 ready <= 1;
-                dataOutChannel1 <= dataInChannel1NumeratorScaled >>> DENOMINATOR_RIGHT_SHIFT; 
+                dataOutChannel1 <= dataInChannel1NumeratorScaled>>> DENOMINATOR_RIGHT_SHIFT; 
                 dataOutChannel2 <= dataInChannel2NumeratorScaled >>> DENOMINATOR_RIGHT_SHIFT; 
                 sampleClock <= 0;
             end 
@@ -75,4 +75,13 @@ module ADCcontroller
             dataOutChannel2 <= 0;
         end
     end
+    ila_0 your_instance_name (
+	.clk(clock
+	), // input wire clk
+
+
+	.probe0(dataInChannel1), // input wire [11:0]  probe0  
+	.probe1(dataOutChannel1), // input wire [11:0]  probe1 
+	.probe2(dataInChannel1NumeratorScaled) // input wire [21:0]  probe2
+);
 endmodule

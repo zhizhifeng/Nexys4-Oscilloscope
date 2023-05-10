@@ -38,23 +38,18 @@ module ADC #(parameter IO_BITS = 12,
              input den_in,
              input dwe_in,
              input samplePeriod,
-             input channelDataReady,
              output [TOGGLE_CHANNELS_STATE_BITS-1:0] state,
              output [TOGGLE_CHANNELS_STATE_BITS-1:0] previousState,
-             input adcc_ready,
-             input adccRawReady,
-             input signed [11:0] ADCCdataOutChannel1,
-             input signed [11:0] adccRawDataOutChannel1,
-             input signed [11:0] ADCCdataOutChannel2,
-             input signed [11:0] adccRawDataOutChannel2,
-             output reg ready,
-             output reg rawReady,
-             output reg signed[IO_BITS-1:0] dataOutChannel1,
-             output reg signed[IO_BITS-1:0] rawDataOutChannel1,
-             output reg signed[IO_BITS-1:0] dataOutChannel2,
-             output reg signed[IO_BITS-1:0] rawDataOutChannel2);
-
+             output adcc_ready,
+             output adccRawReady,
+             output signed [11:0] ADCCdataOutChannel1,
+             output signed [11:0] adccRawDataOutChannel1,
+             output signed [11:0] ADCCdataOutChannel2,
+             output signed [11:0] adccRawDataOutChannel2
              
+            );
+
+    wire channelDataReady;
     wire [DRP_ADDRESS_BITS-1:0] DRPAddress;
     wire DRPEnable;
     wire DRPWriteEnable;

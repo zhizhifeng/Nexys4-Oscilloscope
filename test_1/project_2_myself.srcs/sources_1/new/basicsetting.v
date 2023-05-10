@@ -40,7 +40,7 @@ module basicsetting
      output reg xyenable=0
      );
      always @(posedge clock) begin
-                 triggerThreshold1 <= `OPERATE(triggerThreshold);
+                 triggerThreshold1 <=(triggerThreshold*1000)>>12;
         case (sw[3:0])
           4'b0000: 
              if (btnu) triggerThreshold <= triggerThreshold + TRIGGER_THRESHOLD_ADJUST;

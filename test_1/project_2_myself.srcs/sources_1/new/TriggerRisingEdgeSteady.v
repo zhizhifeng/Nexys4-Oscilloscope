@@ -59,6 +59,7 @@ module TriggerRisingEdgeSteady
                 isTriggered <= 0;
         end
     end
-    
+
+
    
 endmodule
