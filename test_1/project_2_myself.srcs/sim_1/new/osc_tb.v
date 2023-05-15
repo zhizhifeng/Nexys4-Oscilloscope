@@ -51,10 +51,11 @@ module osc_tb(
     initial begin
         CLK100MHZ = 0;
         SW = 16'b0;
-        BTNU = 0;
+        BTNU = 1;
         BTND = 0;
         BTNC = 0;
         BTNL = 0;
+        #10 BTNU = 0;
     end
 
     always begin

@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="69.301 ns"></ZoomEndTime>
-      <Cursor1Time time="284,771.518 ns"></Cursor1Time>
+      <ZoomStartTime time="793.350777 us"></ZoomStartTime>
+      <ZoomEndTime time="807.690778 us"></ZoomEndTime>
+      <Cursor1Time time="803.730777 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="362"></NameColumnWidth>
+      <NameColumnWidth column_width="338"></NameColumnWidth>
       <ValueColumnWidth column_width="116"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="16" />
+   <WVObjectSize size="54" />
    <wvobject fp_name="/osc_tb/CLK100MHZ" type="logic">
       <obj_property name="ElementShortName">CLK100MHZ</obj_property>
       <obj_property name="ObjectShortName">CLK100MHZ</obj_property>
@@ -48,48 +48,196 @@
       <obj_property name="ElementShortName">rgb[11:0]</obj_property>
       <obj_property name="ObjectShortName">rgb[11:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/osc_tb/u_oscilloscope/totaltrigger/Trigger/isTriggered" type="logic">
+   <wvobject fp_name="/osc_tb/u_oscilloscope/CLK100MHZ" type="logic">
+      <obj_property name="ElementShortName">CLK100MHZ</obj_property>
+      <obj_property name="ObjectShortName">CLK100MHZ</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/vauxp11" type="logic">
+      <obj_property name="ElementShortName">vauxp11</obj_property>
+      <obj_property name="ObjectShortName">vauxp11</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/vauxn11" type="logic">
+      <obj_property name="ElementShortName">vauxn11</obj_property>
+      <obj_property name="ObjectShortName">vauxn11</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/vauxp3" type="logic">
+      <obj_property name="ElementShortName">vauxp3</obj_property>
+      <obj_property name="ObjectShortName">vauxp3</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/vauxn3" type="logic">
+      <obj_property name="ElementShortName">vauxn3</obj_property>
+      <obj_property name="ObjectShortName">vauxn3</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/SW" type="array">
+      <obj_property name="ElementShortName">SW[15:0]</obj_property>
+      <obj_property name="ObjectShortName">SW[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/BTNU" type="logic">
+      <obj_property name="ElementShortName">BTNU</obj_property>
+      <obj_property name="ObjectShortName">BTNU</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/BTND" type="logic">
+      <obj_property name="ElementShortName">BTND</obj_property>
+      <obj_property name="ObjectShortName">BTND</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/BTNC" type="logic">
+      <obj_property name="ElementShortName">BTNC</obj_property>
+      <obj_property name="ObjectShortName">BTNC</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/BTNL" type="logic">
+      <obj_property name="ElementShortName">BTNL</obj_property>
+      <obj_property name="ObjectShortName">BTNL</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/hsync" type="logic">
+      <obj_property name="ElementShortName">hsync</obj_property>
+      <obj_property name="ObjectShortName">hsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/vsync" type="logic">
+      <obj_property name="ElementShortName">vsync</obj_property>
+      <obj_property name="ObjectShortName">vsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/rgb" type="array">
+      <obj_property name="ElementShortName">rgb[11:0]</obj_property>
+      <obj_property name="ObjectShortName">rgb[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/CLK108MHZ" type="logic">
+      <obj_property name="ElementShortName">CLK108MHZ</obj_property>
+      <obj_property name="ObjectShortName">CLK108MHZ</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/triggerThreshold" type="array">
+      <obj_property name="ElementShortName">triggerThreshold[11:0]</obj_property>
+      <obj_property name="ObjectShortName">triggerThreshold[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/triggerThreshold1" type="array">
+      <obj_property name="ElementShortName">triggerThreshold1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">triggerThreshold1[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/samplePeriod" type="array">
+      <obj_property name="ElementShortName">samplePeriod[5:0]</obj_property>
+      <obj_property name="ObjectShortName">samplePeriod[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/channelSelected" type="logic">
+      <obj_property name="ElementShortName">channelSelected</obj_property>
+      <obj_property name="ObjectShortName">channelSelected</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/scale_exp1" type="array">
+      <obj_property name="ElementShortName">scale_exp1[2:0]</obj_property>
+      <obj_property name="ObjectShortName">scale_exp1[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/scale_exp2" type="array">
+      <obj_property name="ElementShortName">scale_exp2[2:0]</obj_property>
+      <obj_property name="ObjectShortName">scale_exp2[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/xyenable" type="logic">
+      <obj_property name="ElementShortName">xyenable</obj_property>
+      <obj_property name="ObjectShortName">xyenable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/adcc_ready" type="logic">
+      <obj_property name="ElementShortName">adcc_ready</obj_property>
+      <obj_property name="ObjectShortName">adcc_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/adccRawReady" type="logic">
+      <obj_property name="ElementShortName">adccRawReady</obj_property>
+      <obj_property name="ObjectShortName">adccRawReady</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/ADCCdataOutChannel1" type="array">
+      <obj_property name="ElementShortName">ADCCdataOutChannel1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">ADCCdataOutChannel1[11:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/adccRawDataOutChannel1" type="array">
+      <obj_property name="ElementShortName">adccRawDataOutChannel1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">adccRawDataOutChannel1[11:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/ADCCdataOutChannel2" type="array">
+      <obj_property name="ElementShortName">ADCCdataOutChannel2[11:0]</obj_property>
+      <obj_property name="ObjectShortName">ADCCdataOutChannel2[11:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/adccRawDataOutChannel2" type="array">
+      <obj_property name="ElementShortName">adccRawDataOutChannel2[11:0]</obj_property>
+      <obj_property name="ObjectShortName">adccRawDataOutChannel2[11:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/isTriggered" type="logic">
       <obj_property name="ElementShortName">isTriggered</obj_property>
       <obj_property name="ObjectShortName">isTriggered</obj_property>
    </wvobject>
-   <wvobject fp_name="/osc_tb/u_oscilloscope/u_display/u_VGA/h_cnt" type="array">
-      <obj_property name="ElementShortName">h_cnt[10:0]</obj_property>
-      <obj_property name="ObjectShortName">h_cnt[10:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/activeBramSelect" type="logic">
+      <obj_property name="ElementShortName">activeBramSelect</obj_property>
+      <obj_property name="ObjectShortName">activeBramSelect</obj_property>
    </wvobject>
-   <wvobject fp_name="/osc_tb/u_oscilloscope/u_display/u_VGA/v_cnt" type="array">
-      <obj_property name="ElementShortName">v_cnt[9:0]</obj_property>
-      <obj_property name="ObjectShortName">v_cnt[9:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/refresh" type="logic">
+      <obj_property name="ElementShortName">refresh</obj_property>
+      <obj_property name="ObjectShortName">refresh</obj_property>
    </wvobject>
-   <wvobject fp_name="/osc_tb/u_oscilloscope/adc/adcc/dataOutChannel1" type="array">
-      <obj_property name="ElementShortName">dataOutChannel1[11:0]</obj_property>
-      <obj_property name="ObjectShortName">dataOutChannel1[11:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/bufferDataOutChannel1" type="array">
+      <obj_property name="ElementShortName">bufferDataOutChannel1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">bufferDataOutChannel1[11:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/osc_tb/u_oscilloscope/adc/adcc/rawDataOutChannel1" type="array">
-      <obj_property name="ElementShortName">rawDataOutChannel1[11:0]</obj_property>
-      <obj_property name="ObjectShortName">rawDataOutChannel1[11:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/data_address" type="array">
+      <obj_property name="ElementShortName">data_address[11:0]</obj_property>
+      <obj_property name="ObjectShortName">data_address[11:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/osc_tb/u_oscilloscope/adc/adcc/dataOutChannel2" type="array">
-      <obj_property name="ElementShortName">dataOutChannel2[11:0]</obj_property>
-      <obj_property name="ObjectShortName">dataOutChannel2[11:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/bufferDataOutChannel2" type="array">
+      <obj_property name="ElementShortName">bufferDataOutChannel2[11:0]</obj_property>
+      <obj_property name="ObjectShortName">bufferDataOutChannel2[11:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/osc_tb/u_oscilloscope/adc/adcc/rawDataOutChannel2" type="array">
-      <obj_property name="ElementShortName">rawDataOutChannel2[11:0]</obj_property>
-      <obj_property name="ObjectShortName">rawDataOutChannel2[11:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/MaxChannel1" type="array">
+      <obj_property name="ElementShortName">MaxChannel1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">MaxChannel1[11:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/osc_tb/u_oscilloscope/u_display/data_in_1" type="array">
-      <obj_property name="ElementShortName">data_in_1[11:0]</obj_property>
-      <obj_property name="ObjectShortName">data_in_1[11:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/MaxChannel2" type="array">
+      <obj_property name="ElementShortName">MaxChannel2[11:0]</obj_property>
+      <obj_property name="ObjectShortName">MaxChannel2[11:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/osc_tb/u_oscilloscope/u_display/data_in_2" type="array">
-      <obj_property name="ElementShortName">data_in_2[11:0]</obj_property>
-      <obj_property name="ObjectShortName">data_in_2[11:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/MinChannel1" type="array">
+      <obj_property name="ElementShortName">MinChannel1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">MinChannel1[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/MinChannel2" type="array">
+      <obj_property name="ElementShortName">MinChannel2[11:0]</obj_property>
+      <obj_property name="ObjectShortName">MinChannel2[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/max1" type="array">
+      <obj_property name="ElementShortName">max1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">max1[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/max2" type="array">
+      <obj_property name="ElementShortName">max2[11:0]</obj_property>
+      <obj_property name="ObjectShortName">max2[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/min1" type="array">
+      <obj_property name="ElementShortName">min1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">min1[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/min2" type="array">
+      <obj_property name="ElementShortName">min2[11:0]</obj_property>
+      <obj_property name="ObjectShortName">min2[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/locked" type="logic">
+      <obj_property name="ElementShortName">locked</obj_property>
+      <obj_property name="ObjectShortName">locked</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/DRP_ADDRESS_BITS" type="array">
+      <obj_property name="ElementShortName">DRP_ADDRESS_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DRP_ADDRESS_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/DRP_SAMPLE_BITS" type="array">
+      <obj_property name="ElementShortName">DRP_SAMPLE_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DRP_SAMPLE_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/SAMPLE_BITS" type="array">
+      <obj_property name="ElementShortName">SAMPLE_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">SAMPLE_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/osc_tb/u_oscilloscope/TOGGLE_CHANNELS_STATE_BITS" type="array">
+      <obj_property name="ElementShortName">TOGGLE_CHANNELS_STATE_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">TOGGLE_CHANNELS_STATE_BITS[31:0]</obj_property>
    </wvobject>
 </wave_config>

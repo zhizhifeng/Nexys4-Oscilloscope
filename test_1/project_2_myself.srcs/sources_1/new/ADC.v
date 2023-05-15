@@ -11,17 +11,15 @@ module ADC #(parameter IO_BITS = 12,
              input clk,
              input reset,
              input [5:0] samplePeriod,
-             output [TOGGLE_CHANNELS_STATE_BITS-1:0] state,
-             output [TOGGLE_CHANNELS_STATE_BITS-1:0] previousState,
              output adcc_ready,
              output adccRawReady,
              output signed [11:0] ADCCdataOutChannel1,
              output signed [11:0] adccRawDataOutChannel1,
              output signed [11:0] ADCCdataOutChannel2,
-             output signed [11:0] adccRawDataOutChannel2
-             
-            );
-
+             output signed [11:0] adccRawDataOutChannel2);
+    
+    wire [TOGGLE_CHANNELS_STATE_BITS-1:0] state;
+    wire [TOGGLE_CHANNELS_STATE_BITS-1:0] previousState;
     wire channelDataReady;
     wire [DRP_ADDRESS_BITS-1:0] DRPAddress;
     wire DRPEnable;
@@ -31,7 +29,6 @@ module ADC #(parameter IO_BITS = 12,
     wire endOfConversion;
     wire signed [SAMPLE_BITS-1:0] channel1;
     wire signed [SAMPLE_BITS-1:0] channel2;
-
     
     xadc_wiz_0 xadc (
     .di_in(),
@@ -49,7 +46,7 @@ module ADC #(parameter IO_BITS = 12,
     .vauxp11(vauxp11),
     .vauxn11(vauxn11),
     .channel_out(),
-    .eoc_out(endOfConversion),//ת���źŽ�����־
+    .eoc_out(endOfConversion),
     .alarm_out(),
     .eos_out(),
     .busy_out()
@@ -69,8 +66,6 @@ module ADC #(parameter IO_BITS = 12,
     .state(state),
     .previousState(previousState)
     );
-    
-    
     
     ADCcontroller adcc(
     .clock(clk),

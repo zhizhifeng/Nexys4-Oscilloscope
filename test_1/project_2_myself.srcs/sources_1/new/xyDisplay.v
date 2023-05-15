@@ -15,7 +15,7 @@ module xyDisplay#(parameter RGB = `GREEN)
 
     wire [`DATA_IN_BITS - 1:0] x_position;
     wire [`DATA_IN_BITS - 1:0] y_position;
-    wire x_cnt_delay;
+    wire [`DISPLAY_X_BITS - 1:0] x_cnt_delay;
     reg [`DISPLAY_X_LEN - 1:0] row_buffer [0:1];
     reg buffer_switch = 0;
 
@@ -25,9 +25,9 @@ module xyDisplay#(parameter RGB = `GREEN)
 
     always @(posedge clk) begin
         if (y_position == (y_cnt + 1)) begin
-            row_buffer[~buffer_switch][x_cnt_delay] <= 1;
+            row_buffer[~buffer_switch][x_position] <= 1;
         end else begin
-            row_buffer[~buffer_switch][x_cnt_delay] <= 0;
+            row_buffer[~buffer_switch][x_position] <= 0;
         end
 
         if(x_cnt == `DISPLAY_X_LEN - 1) begin
